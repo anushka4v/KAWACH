@@ -4,7 +4,7 @@
  * Never decides security policies on the frontend.
  */
 
-   const API_BASE = (import.meta.env.VITE_API_BASE || "http://localhost:8000").replace(/\/$/, "");
+   const API_BASE_URL = import.meta.env.VITE_API_BASE || 'https://kawach-backend-mjk5.onrender.com';
 
 async function request(path, options = {}) {
   try {
@@ -31,7 +31,7 @@ async function request(path, options = {}) {
       (err.message.includes("fetch") || err.message.includes("Failed to fetch"))
     ) {
       throw new Error(
-        "Backend unreachable. Please ensure the Python FastAPI server is running at http://localhost:8000."
+        "Backend unreachable. Please ensure the Python FastAPI server is running."
       );
     }
     throw err;
