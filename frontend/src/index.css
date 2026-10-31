@@ -1,0 +1,258 @@
+@import "tailwindcss" source(none);
+/* Paths resolve relative to this stylesheet (src/index.css).
+   Scanning only this folder keeps the stale "src - Copy" backup out. */
+@source "../index.html";
+@source "./**/*.{js,jsx,ts,tsx}";
+
+/* ============================================================
+   ATMOS GALLERY PALETTE — warm light beige / brown editorial theme
+   ============================================================ */
+:root {
+  --bg-page: #E9DFD0;
+  --bg-page-2: #D9C7AE;
+  --bg-sidebar: #E2D4BF;
+  --bg-input: #F3EADC;
+  --card: #7D5E46;
+  --card-hover: #8A6A51;
+  --card-border: #6A4F3A;
+  --line: #C9B396;
+  --text-dark: #3B2A20;
+  --text-muted: #6E5645;
+  --text-on-card: #F5EBDD;
+  --text-on-card-muted: #E0CDB3;
+  --accent-dark: #3B2A20;
+  --accent-tan: #C19A6B;
+}
+
+/* Expose the palette to Tailwind utilities (bg-page, bg-card, text-dark, ...) */
+@theme {
+  --color-page: var(--bg-page);
+  --color-page-2: var(--bg-page-2);
+  --color-sidebar: var(--bg-sidebar);
+  --color-input: var(--bg-input);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-border: var(--card-border);
+  --color-line: var(--line);
+  --color-dark: var(--text-dark);
+  --color-muted: var(--text-muted);
+  --color-on-card: var(--text-on-card);
+  --color-on-card-muted: var(--text-on-card-muted);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-tan: var(--accent-tan);
+}
+
+html {
+  background-color: var(--bg-page);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  background-image:
+    radial-gradient(1200px 600px at 70% 0%, #F3EADC 0%, transparent 60%),
+    radial-gradient(900px 500px at 10% 100%, #D9C7AE 0%, transparent 55%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-dark);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--accent-tan);
+  color: var(--text-dark);
+}
+
+/* Thin tan scrollbars on a beige track */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-page-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-tan);
+  border-radius: 9999px;
+  border: 2px solid var(--bg-page-2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--card);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-tan) var(--bg-page-2);
+}
+
+/* ============================================================
+   Shared surfaces & controls
+   ============================================================ */
+.k-card {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(59, 42, 32, 0.18);
+  color: var(--text-on-card);
+}
+
+.k-card-inner {
+  background-color: #6A4F3A;
+  border: 1px solid rgba(245, 235, 221, 0.14);
+  border-radius: 0.75rem;
+  color: var(--text-on-card-muted);
+}
+
+.k-card-hover {
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.k-card-hover:hover {
+  background-color: var(--card-hover);
+  border-color: rgba(245, 235, 221, 0.28);
+}
+
+.k-eyebrow {
+  color: var(--accent-tan);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.k-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  line-height: 1.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.k-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.k-btn-primary {
+  background-color: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  color: var(--text-on-card);
+}
+.k-btn-primary:hover:not(:disabled) {
+  background-color: #51392B;
+  border-color: #51392B;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(59, 42, 32, 0.24);
+}
+
+.k-btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--text-dark);
+  color: var(--text-dark);
+}
+.k-btn-secondary:hover:not(:disabled) {
+  background-color: rgba(193, 154, 107, 0.22);
+}
+
+/* Secondary action placed on a middle-brown card */
+.k-btn-outline-light {
+  background-color: transparent;
+  border: 1px solid rgba(245, 235, 221, 0.65);
+  color: var(--text-on-card);
+}
+.k-btn-outline-light:hover:not(:disabled) {
+  background-color: rgba(245, 235, 221, 0.12);
+}
+
+/* Destructive action placed on a middle-brown card */
+.k-btn-danger-light {
+  background-color: transparent;
+  border: 1px solid rgba(242, 207, 203, 0.7);
+  color: #F2CFCB;
+}
+.k-btn-danger-light:hover:not(:disabled) {
+  background-color: rgba(242, 207, 203, 0.14);
+}
+
+.k-input {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  color: var(--text-dark);
+  padding: 0.55rem 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.k-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+.k-input:focus {
+  outline: none;
+  border-color: var(--accent-tan);
+  box-shadow: 0 0 0 2px var(--accent-tan);
+}
+
+.k-table-wrap {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--card-border);
+  background-color: var(--card);
+  box-shadow: 0 8px 24px rgba(59, 42, 32, 0.18);
+}
+.k-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  color: var(--text-on-card);
+}
+.k-table thead {
+  background-color: #6A4F3A;
+  color: var(--text-on-card);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.k-table th {
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.k-table td {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid rgba(245, 235, 221, 0.15);
+}
+.k-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+.k-table tbody tr:hover {
+  background-color: var(--card-hover);
+}
+
+.k-pre {
+  background-color: #3B2A20;
+  border: 1px solid var(--card-border);
+  border-radius: 0.6rem;
+  color: var(--text-on-card);
+  padding: 0.75rem;
+  font-size: 0.68rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
